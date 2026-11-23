@@ -21,23 +21,17 @@
 #include <regex>
 #include <string>
 
-DEFINE_string(configuration_directory, "",
-              "First directory in which configuration files are searched, "
-              "second is always the Cartographer installation to allow "
-              "including files from there.");
+DECLARE_string(configuration_directory);
 DEFINE_string(configuration_basename, "",
               "Basename, i.e. not containing any directory prefix, of the "
               "configuration file.");
 DEFINE_string(
     urdf_filename, "",
     "URDF file that contains static links for your sensor configuration.");
-DEFINE_string(bag_filenames, "",
-              "Bags to process, must be in the same order as the trajectories "
-              "in 'pose_graph_filename'.");
+DECLARE_string(bag_filenames);
 DEFINE_string(pose_graph_filename, "",
               "Proto stream file containing the pose graph.");
-DEFINE_bool(use_bag_transforms, true,
-            "Whether to read and use the transforms from the bag.");
+DECLARE_bool(use_bag_transforms);
 DEFINE_string(output_file_prefix, "",
               "Will be prefixed to all output file names and can be used to "
               "define the output directory. If empty, the first bag filename "

@@ -30,6 +30,9 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 find_package(absl REQUIRED)
 find_package(builtin_interfaces REQUIRED)
+# cartographer's exported target links Boost::iostreams (Boost config mode),
+# so the imported target must exist before find_package(cartographer).
+find_package(Boost REQUIRED COMPONENTS iostreams)
 find_package(cartographer REQUIRED)
 find_package(cartographer_ros_msgs REQUIRED)
 find_package(Eigen3 REQUIRED)

@@ -18,6 +18,32 @@
 
 #include "glog/logging.h"
 
+#include "gflags/gflags.h"
+
+// 공유 gflags 정의 (1회만). node_main/offline_node/assets_writer_main에서는
+// DECLARE로 참조한다. Lyrical(gflags 2.2)부터 중복 DEFINE이면 실행 즉시
+// "defined more than once"로 죽는다 (issue-tracking 2026-10-28 §11).
+DEFINE_bool(collect_metrics, false,
+            "Activates the collection of runtime metrics. If activated, the "
+            "metrics can be accessed via a ROS service.");
+DEFINE_string(configuration_directory, "",
+              "First directory in which configuration files are searched, "
+              "second is always the Cartographer installation to allow "
+              "including files from there.");
+DEFINE_string(load_state_filename, "",
+              "If non-empty, filename of a .pbstream file to load, containing "
+              "a saved SLAM state.");
+DEFINE_bool(load_frozen_state, true,
+            "Load the saved state as frozen (non-optimized) trajectories.");
+DEFINE_string(
+    save_state_filename, "",
+    "If non-empty, serialize state and write it to disk before shutting down.");
+DEFINE_string(bag_filenames, "",
+              "Comma-separated list of bags to process. One bag per trajectory. "
+              "Any combination of simultaneous and sequential bags is supported.");
+DEFINE_bool(use_bag_transforms, true,
+            "Whether to read, use and republish transforms from bags.");
+
 namespace cartographer_ros {
 
 std::vector<std::string> ComputeRepeatedTopicNames(const std::string& topic,

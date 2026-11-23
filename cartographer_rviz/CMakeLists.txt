@@ -29,6 +29,9 @@ endif()
 
 set(CMAKE_AUTOMOC ON)
 
+# cartographer's exported target links Boost::iostreams (Boost config mode),
+# so the imported target must exist before find_package(cartographer).
+find_package(Boost REQUIRED COMPONENTS iostreams)
 find_package(cartographer REQUIRED)
 include("${CARTOGRAPHER_CMAKE_DIR}/functions.cmake")
 set(BUILD_SHARED_LIBS OFF)
